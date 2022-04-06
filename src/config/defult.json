@@ -1,0 +1,4 @@
+{
+    "jwtPrivatKey" :  "abc_123",
+    "DB_URL": "mongodb://localhost/appointmentsystem"
+}
