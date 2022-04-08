@@ -5,7 +5,17 @@ const auth = require('../route/auth.route');
 const appointment = require('../route/appointment.route');
 const presciption = require('../route/prescription.route');
 
+
+
 module.exports = (app)=>{
+    app.get("",(req,res) => {
+        res.json({
+            message: "Hello there!! These are appointmentSystem APIs",
+            api_helth: "good",
+            api_version: "V1.0.0",
+          });
+    })
+    
     app.use(express.json());
     app.use('/api/user', user);
     app.use('/api/category', category);
