@@ -16,10 +16,12 @@ exports.auth = async (req, res, next) => {
   try {
     const decoded = jwt.verify(token,  config.jwtPrivatKey)
     req.user = decoded
-   if(!req.id == decoded._id ){
-    return sendResponse(res, messages.badRequest(responescode.badRequest))
-   }
-   next();
+    
+    let getID = mongoDbServiceUser.getDocumentById(decoded.id)
+    if(!getID){
+      return sendResponse(res, messages.badRequest(responescode.badRequest))
+    } 
+    next();     
   } catch (err) {
     console.log(err);
     return sendResponse(res, messages.badRequest(responescode.badRequest));

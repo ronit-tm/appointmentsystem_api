@@ -7,8 +7,7 @@ const mongoDbServiceUser = require("../../service/mongoDbService")({model: User}
 exports.putUser = async (req, res) => {
   try {
     let { id } = req.params;
-    let { name, phone, categroy } = req.body;
-    let user = await mongoDbServiceUser.getSingleDocumentById({id});
+    let { name, phone, categroy, address } = req.body;
     if (!user) {
       return sendResponse( res, messages.notFound(responescode.notFound));
     }
@@ -16,12 +15,14 @@ exports.putUser = async (req, res) => {
    user.name = name? name: user.name
    user.phone = phone ? phone : user.phone
    user.categroy = categroy ? categroy : user.categroy
+   user.address = address ? address : user.address
   
     let putuser = await mongoDbServiceUser.findOneAndUpdateDocument({_id:id}, user,{new:true})
   
     if (putuser) {
       putuser = putuser.toJSON();
-      delete putuser.password
+      delete putuser.passwor
+      delete putuser.__v
       return sendResponse(res, messages.successResponse(responescode.success, putuser)
       );
     } else {

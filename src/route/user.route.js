@@ -11,11 +11,11 @@ const rules = require('../validation/user.validation');
 const { auth } = require("../middleare/auth");
 
 // router.use(auth);
-router.get('/',  validate(rules.userget) , userGet.getUser);
+router.get('/', validate(rules.userget) , userGet.getUser);
 router.post('/', validate(rules.userpost) , userPost.postUser);
 router.get ('/get-doctor' , userGet.getDoctor)
-router.put('/:id',auth, validate(rules.userput) , userPut.putUser);
-router.delete('/:id',auth, validate(rules.userdelete) , userDelete.deleteUser);
+router.put('/:id', validate(rules.userput) , userPut.putUser);
+router.delete('/:id', validate(rules.userdelete) , userDelete.deleteUser);
 router.get('/:id', auth, validate(rules.userget) , usergetone.getoneUser);
 
 
