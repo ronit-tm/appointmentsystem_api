@@ -7,7 +7,6 @@ const mongoDbServiceCategroy = require("../../service/mongoDbService")({ model: 
 exports.categoryPost = async (req, res) => {
   try {
     let { categoryName } = req.body;
-
     let getCategory = await mongoDbServiceCategroy.getSingleDocumentByQuery({ categoryName }, ["categoryName" ]);;
     if (getCategory) {
       return sendResponse(res, messages.conflict(responescode.conflict));
@@ -15,9 +14,9 @@ exports.categoryPost = async (req, res) => {
     let category = {
       categoryName,
     };
-    let createcategory = await mongoDbServiceCategroy.createDocument(category);
-    if (createcategory) {
-      return sendResponse(res, messages.successResponse(responescode.success, createcategory));
+    let createCategory = await mongoDbServiceCategroy.createDocument(category);
+    if (createCategory) {
+      return sendResponse(res, messages.successResponse(responescode.success, createCategory));
     } else {
       return sendResponse(res, messages.badRequest(responescode.badRequest));
     }

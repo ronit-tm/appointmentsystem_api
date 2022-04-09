@@ -19,10 +19,10 @@ exports.appointmentPut = async(req,res) => {
       appointment.address = address ? address : appointment.address
       appointment.phone = phone ? phone : appointment.phone
 
-      let putappointment = await mongoDbServiceAppointment.findOneAndUpdateDocument({_id : id}, appointment , 
+      let updateAppointment = await mongoDbServiceAppointment.findOneAndUpdateDocument({_id : id}, appointment , 
         {new : true});
-         if(putappointment){
-           return sendResponse(res, messages.successResponse(responescode.success, putappointment)) 
+         if(updateAppointment){
+           return sendResponse(res, messages.successResponse(responescode.success, updateAppointment)) 
          } else {
            return sendResponse(res, messages.badRequest(responescode.badRequest))
          }

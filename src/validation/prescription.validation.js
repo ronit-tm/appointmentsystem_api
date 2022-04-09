@@ -3,7 +3,7 @@ const { query } = require("express");
 const { body, param, header } = require("express-validator");
 const { Presciption } = require("../model/prescription.model");
 const { User } = require("../model/user.model");
-const mongoDbServiceuser = require("../service/mongoDbService")({model: User});
+const mongoDbServiceUser = require("../service/mongoDbService")({model: User});
 const mongoDbServicePrescription = require("../service/mongoDbService")({model: Presciption });
 
 module.exports = {
@@ -15,14 +15,14 @@ module.exports = {
 
   prescriptionpost: [
     body("doctor").custom((value) => {
-      return mongoDbServiceuser.getDocumentById(value).then((prescription) => {
+      return mongoDbServiceUser.getDocumentById(value).then((prescription) => {
         if (!prescription) {
           return Promise.reject("can not found ID");
         }
       });
     }),
     body("patient").custom((value) => {
-      return mongoDbServiceuser.getDocumentById(value).then((prescription) => {
+      return mongoDbServiceUser.getDocumentById(value).then((prescription) => {
         if (!prescription) {
           return Promise.reject("can not found ID");
         }
@@ -35,14 +35,14 @@ module.exports = {
 
   prescriptionput: [
     body("doctor").custom((value) => {
-      return mongoDbServiceuser.getDocumentById(value).then((prescription) => {
+      return mongoDbServiceUser.getDocumentById(value).then((prescription) => {
         if (!prescription) {
           return Promise.reject("can not found ID");
         }
       });
     }),
     body("patient").custom((value) => {
-      return mongoDbServiceuser.getDocumentById(value).then((prescription) => {
+      return mongoDbServiceUser.getDocumentById(value).then((prescription) => {
         if (!prescription) {
           return Promise.reject("can not found ID");
         }

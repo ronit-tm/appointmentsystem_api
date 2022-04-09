@@ -15,8 +15,8 @@ exports.getAllpresciption = async (req, res) => {
     } else if (doctor) {
       return (query = { doctor });
     }
-    let getpresciption = await mongoDbServicePrescription.getDocumentByQuery(query);;
-    if (!getpresciption) {
+    let getPresciption = await mongoDbServicePrescription.getDocumentByQuery(query);;
+    if (!getPresciption) {
       return sendResponse(res, messages.notFound(responescode.notFound));
     }
     const select = ["doctor", "patient", "note", "date", "media"];
@@ -41,7 +41,6 @@ exports.prescriptionGetId = async (req, res) => {
     let { id } = req.params;
     const select = ["doctor", "patient", "note", "date", "media"];
     await mongoDbServicePrescription.getSingleDocumentById (id, select)
-      // await  Category.findById(id)
       .then((data) => {
         return sendResponse( res, messages.successResponse(responescode.success, data));
       })

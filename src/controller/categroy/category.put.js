@@ -12,16 +12,15 @@ exports.categoryPut = async (req, res) => {
     if(findCategory){
       return sendResponse(res, messages.conflict(responescode.conflict))
     }
-  
     let category = await mongoDbServiceCategroy.getSingleDocumentById(id);
     if (!category) {
       return sendResponse(res, messages.notFound(responescode.notFound));
     }
     category = category.toJSON()
     category.categoryName = categoryName ? categoryName : category.categoryName
-    let putcategory = await mongoDbServiceCategroy.findOneAndUpdateDocument({_id : id} , category , { new : true});
-    if (putcategory) {
-      return sendResponse(res, messages.successResponse(responescode.success, putcategory));
+    let updateCategory = await mongoDbServiceCategroy.findOneAndUpdateDocument({_id : id} , category , { new : true});
+    if (updateCategory) {
+      return sendResponse(res, messages.successResponse(responescode.success, updateCategory));
     } else {
       return sendResponse(res, messages.badRequest(responescode.badRequest));
     }

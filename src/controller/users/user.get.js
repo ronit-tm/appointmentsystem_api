@@ -1,9 +1,8 @@
 const { User } = require("../../model/user.model");
-const { Category } = require("../../model/categroy.model");
 const messages = require("../../utils/messegs");
 const responescode = require("../../utils/responescode");
 const { sendResponse } = require("../../helps/sendResponse");
-const mongoDbserviceuser = require("../../service/mongoDbService")({ model: User});
+const mongoDbserviceUser = require("../../service/mongoDbService")({ model: User});
 
 exports.getUser = async (req, res) => {
   try {
@@ -17,8 +16,7 @@ exports.getUser = async (req, res) => {
        }
        const select = ["name", "address", "email", "phone", "role", "category"];
      const populate = [{ path: "category", select: "categoryName" }];
-        await mongoDbserviceuser.getDocumentByQueryPopulate(query, select, populate)
-    
+        await mongoDbserviceUser.getDocumentByQueryPopulate(query, select, populate)
       .then((data) => {
         return sendResponse(res,messages.successResponse(responescode.success, data));
       })
@@ -39,7 +37,7 @@ exports.getoneUser = async (req, res) => {
       return sendResponse(res, messages.notFound(responescode.notFound));
     }
     const select = ["name", "status", "email", "phone", "role", "category"];
-    await mongoDbserviceuser.getSingleDocumentByQuery({id}, select)
+    await mongoDbserviceUser.getSingleDocumentByQuery({id}, select)
       .then((data) => {
         return sendResponse(res, messages.successResponse(responescode.success, data));
       })
@@ -61,7 +59,7 @@ exports.getDoctor = async (req, res) => {
             category : req.query.category
           }
           : {};
-   let searchCategroy = await mongoDbserviceuser.getDocumentByQuery(search,["name", "email", "phone",  "role", "category"] )
+   let searchCategroy = await mongoDbserviceUser.getDocumentByQuery(search,["name", "email", "phone",  "role", "category"] )
     if(searchCategroy){
 
        return sendResponse(res, messages.successResponse(responescode.success,searchCategroy))

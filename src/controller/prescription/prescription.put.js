@@ -18,9 +18,9 @@ exports.presciptionPut = async (req, res) => {
    prescription.note = note ? note : prescription.note
    prescription.media = media ? media : prescription.media
 
-    let putPrescription = await mongoDbServicePrescription.findOneAndUpdateDocument({ _id : id}, prescription, {new : true});
-    if (putPrescription) {
-      return sendResponse(res, messages.successResponse(responescode.success, putPrescription));
+    let updatePrescription = await mongoDbServicePrescription.findOneAndUpdateDocument({ _id : id}, prescription, {new : true});
+    if (updatePrescription) {
+      return sendResponse(res, messages.successResponse(responescode.success, updatePrescription));
     } else {
       return sendResponse(res, messages.badRequest(responescode.badRequest));
     }

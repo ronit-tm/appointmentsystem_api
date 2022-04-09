@@ -4,7 +4,7 @@ const { body, param, header } = require("express-validator");
 const { User } = require("../model/user.model");
 const { Appointment} = require('../model/appointment.model')
 const mongoDbServiceAppointment = require('../service/mongoDbService')({model : Appointment})
-const mongoDbServiceuser = require("../service/mongoDbService")({model: User});
+const mongoDbServiceUser = require("../service/mongoDbService")({model: User});
 
 module.exports = {
   
@@ -22,7 +22,7 @@ module.exports = {
   appointmentpost: [
     body("doctor").custom(async(value) => {
       console.log(value);
-      return await mongoDbServiceuser.getDocumentById(value).then((appointment) => {
+      return await mongoDbServiceUser.getDocumentById(value).then((appointment) => {
         if (!appointment) {
           return Promise.reject("can not found ID");
         }
@@ -39,23 +39,22 @@ module.exports = {
   //  PUT /appointment
   appointmentput: [
     body("doctor").custom((value) => {
-      return mongoDbServiceuser.getDocumentById(value).then((appointment) => {
+      return mongoDbServiceUser.getDocumentById(value).then((appointment) => {
         if (appointment) {
           return Promise.reject("can not found ID");
         }
       });
     }),
     body("patient").custom((value) => {
-      return mongoDbServiceuser.getDocumentById(value).then((appointment) => {
+      return mongoDbServiceUser.getDocumentById(value).then((appointment) => {
         if (appointment) {
           return Promise.reject("can not found ID");
         }
       });
     }),
-    body("address", "address must be required")
-    .exists()
-    .trim()
-    .isString(),
+    body("email", "email must be required").isEmail().exists(),
+    body("phone", "phone numbar must be required").exists(),
+    body("message" ).optional()
   ],
 
   // DELETE /appointment

@@ -7,8 +7,8 @@ const mongoDbServiceAppointment = require('../../service/mongoDbService')({model
 exports.deleteappointment = async(req,res) => {
     try{
         let {id} = req.params
-      let appointmentdelete = await mongoDbServiceAppointment.deleteDocument(id);
-      if(appointmentdelete){
+      let appointmentDelete = await mongoDbServiceAppointment.deleteDocument(id);
+      if(appointmentDelete){
         return sendResponse(res, messages.successResponseMessage(responescode.success, "data successfull delete"));
       } else {
         return sendResponse(res, messages.badRequest(responescode.badRequest))
