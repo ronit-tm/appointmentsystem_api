@@ -39,7 +39,6 @@ exports.getAllappointment = async (req,res) => {
       let { id } = req.params;
       const select = ["doctor", "patient", "date", "address"];
       await mongoDbServiceCategroy.getDocumentById(id, select)
-        // await  Category.findById(id)
         .then((data) => {
           return sendResponse( res, messages.successResponse(responescode.success, data));
         })
