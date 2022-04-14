@@ -13,4 +13,5 @@ route.post('/', validate(rules.prescriptionpost) , presciptionpost.presciptionPo
 route.put('/:id',auth, validate(rules.prescriptionput) , presciptionput.presciptionPut);
 route.delete('/:id', auth, validate(rules.prescriptiondelete) , presciptiondelete.presciptiondelete);
 
+
 module.exports = route
