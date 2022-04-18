@@ -8,7 +8,7 @@ exports.presciptionPut = async (req, res) => {
   try {
     let { id } = req.params;
     let { doctor, patient, note, media } = req.body;
-    let prescription = await mongoDbServicePrescription.getSingleDocumentById({ id })
+    let prescription = await mongoDbServicePrescription.getSingleDocumentById(id )
     if (!prescription) {
       return sendResponse(res, messages.notFound(responescode.notFound));
     }

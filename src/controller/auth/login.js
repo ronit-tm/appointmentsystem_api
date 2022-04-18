@@ -14,7 +14,7 @@ exports.PostAuthlogin = async (req, res) => {
     }
     let valipassword = await bcrypt.compare(password.toString(), user.password);
     if (!valipassword) {
-      return sendResponse(res, messages.conflict(responescode.badRequest));
+      return sendResponse(res, messages.badRequest(responescode.badRequest));
     }
     const token = user.generateAuthToken();
     user = user.toJSON();

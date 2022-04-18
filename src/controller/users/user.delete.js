@@ -6,7 +6,6 @@ const mongoDbServiceUser = require("../../service/mongoDbService")({model: User}
 exports.deleteUser = async (req, res) => {
   try {
     let { id } = req.params;
-    console.log('id: ', id);
 
     let userDelete = mongoDbServiceUser.hardDeleteDocument(id);
     if (userDelete) {

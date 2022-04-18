@@ -30,6 +30,7 @@ exports.getUser = async (req, res) => {
   }
 };
 
+
 exports.getoneUser = async (req, res) => {
   try {
     let { id } = req.params;
@@ -52,6 +53,7 @@ exports.getoneUser = async (req, res) => {
   }
 };
 
+
 exports.getDoctor = async (req, res) => {
   try{
           let search = req.query.category
@@ -71,3 +73,4 @@ exports.getDoctor = async (req, res) => {
     return sendResponse( res, messages.internalServerError(responescode.internalServerError));
 }
 }
+
