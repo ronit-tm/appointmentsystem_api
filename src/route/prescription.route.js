@@ -9,8 +9,9 @@ const rules = require('../validation/prescription.validation')
 const { auth } = require("../middleare/auth");
 
 route.get('/', validate(rules.prescriptionget) , prescriptionget.getAllpresciption);
+route.get('/:id' , validate(rules.prescriptionget), prescriptionget.prescriptionGetId)
 route.post('/', validate(rules.prescriptionpost) , presciptionpost.presciptionPost);
-route.put('/:id',auth, validate(rules.prescriptionput) , presciptionput.presciptionPut);
-route.delete('/:id', auth, validate(rules.prescriptiondelete) , presciptiondelete.presciptiondelete);
+route.put('/:id', validate(rules.prescriptionput) , presciptionput.presciptionPut);
+route.delete('/:id', validate(rules.prescriptiondelete) , presciptiondelete.presciptiondelete);
 
 module.exports = route

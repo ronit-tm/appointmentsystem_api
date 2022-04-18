@@ -16,7 +16,6 @@ router.post('/', validate(rules.userpost) , userPost.postUser);
 router.get ('/get-doctor' , userGet.getDoctor)
 router.put('/:id', validate(rules.userput) , userPut.putUser);
 router.delete('/:id', validate(rules.userdelete) , userDelete.deleteUser);
-router.get('/:id', auth, validate(rules.userget) , usergetone.getoneUser);
-
+router.get('/:id', validate(rules.userget) , usergetone.getoneUser);
 
 module.exports = router;

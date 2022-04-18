@@ -20,7 +20,8 @@ exports.getAllpresciption = async (req, res) => {
       return sendResponse(res, messages.notFound(responescode.notFound));
     }
     const select = ["doctor", "patient", "note", "date", "media"];
-    await mongoDbServicePrescription.getDocumentByQuery(query, select)
+    const populate = [{ path: "doctor", select: "_id name"}, { path: "patient", select: "_id name" } ];
+    await mongoDbServicePrescription.getDocumentByQueryPopulate(query, select, populate)
       .then((data) => {
         return sendResponse(res, messages.successResponse(responescode.success, data));
       })
@@ -40,7 +41,8 @@ exports.prescriptionGetId = async (req, res) => {
   try {
     let { id } = req.params;
     const select = ["doctor", "patient", "note", "date", "media"];
-    await mongoDbServicePrescription.getSingleDocumentById (id, select)
+    const populate = [{ path: "doctor", select: "_id name"}, { path: "patient", select: "_id name" } ];
+    await mongoDbServicePrescription.getSingleDocumentByIdPopulate (id, select, populate)
       .then((data) => {
         return sendResponse( res, messages.successResponse(responescode.success, data));
       })

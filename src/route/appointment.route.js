@@ -10,7 +10,7 @@ const { auth } = require("../middleare/auth");
 
 router.get("/",  validate(rules.appointmentget), appointmentGet.getAllappointment);
 router.post("/publicRegistra",  validate(rules.appointmentpost), appointmentPost.appointmentPost);
-router.delete("/:id", auth, validate(rules.appointmentdelete), appointmentDelete.deleteappointment);
-router.put("/:id",auth, validate(rules.appointmentput), appointmentPut.appointmentPut);
-
+router.delete("/:id", validate(rules.appointmentdelete), appointmentDelete.deleteappointment);
+router.put("/:id", validate(rules.appointmentput), appointmentPut.appointmentPut);
+router.get("/:id",  validate(rules.appointmentget), appointmentGet.appointmentGetId )
 module.exports = router;

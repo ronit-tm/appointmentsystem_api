@@ -11,9 +11,9 @@ const { auth } = require("../middleare/auth");
 
 router.get('/', validate(rules.categoryget) , categoryget.getAllcategroy);
 router.post('/', validate(rules.categorypost) , categorypost.categoryPost);
-router.put('/:id', auth, validate(rules.categroyput) , categoryput.categoryPut);
-router.delete('/:id', auth, validate(rules.categroydelete) , categorydelete.categoryDelete);
-router.get('/:id', auth, validate(rules.categoryget) , categorygetid.categoryGetId);
+router.put('/:id', validate(rules.categroyput) , categoryput.categoryPut);
+router.delete('/:id', validate(rules.categroydelete) , categorydelete.categoryDelete);
+router.get('/:id', validate(rules.categoryget) , categorygetid.categoryGetId);
 
 
 module.exports = router

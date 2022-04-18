@@ -22,6 +22,8 @@ exports.appointmentPut = async(req,res) => {
       let updateAppointment = await mongoDbServiceAppointment.findOneAndUpdateDocument({_id : id}, appointment , 
         {new : true});
          if(updateAppointment){
+           updateAppointment = updateAppointment.toJSON()
+           delete updateAppointment.__v
            return sendResponse(res, messages.successResponse(responescode.success, updateAppointment)) 
          } else {
            return sendResponse(res, messages.badRequest(responescode.badRequest))

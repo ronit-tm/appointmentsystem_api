@@ -21,16 +21,14 @@ module.exports = {
   // POST  /appointment
   appointmentpost: [
     body("doctor").custom(async(value) => {
-      console.log(value);
       return await mongoDbServiceUser.getDocumentById(value).then((appointment) => {
         if (!appointment) {
           return Promise.reject("can not found ID");
         }
       });
     }),
-    body("email", "email must be required").isEmail().exists(),
-    body("phone", "phone numbar must be required").exists(),
-    body("password").optional(),
+    body("email").optional(),
+    body("phone").optional(),
     body("message" ).optional()
   ],
   
@@ -40,20 +38,20 @@ module.exports = {
   appointmentput: [
     body("doctor").custom((value) => {
       return mongoDbServiceUser.getDocumentById(value).then((appointment) => {
-        if (appointment) {
+        if (!appointment) {
           return Promise.reject("can not found ID");
         }
       });
     }),
     body("patient").custom((value) => {
       return mongoDbServiceUser.getDocumentById(value).then((appointment) => {
-        if (appointment) {
+        if (!appointment) {
           return Promise.reject("can not found ID");
         }
       });
     }),
-    body("email", "email must be required").isEmail().exists(),
-    body("phone", "phone numbar must be required").exists(),
+    body("email", "email must be required").isEmail().optional(),
+    body("phone", "phone numbar must be required").optional(),
     body("message" ).optional()
   ],
 

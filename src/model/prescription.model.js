@@ -18,8 +18,8 @@ const presciptionSchema =  new mongoose.Schema({
       type: String,
     },
     date: {
-      type: Date,
-      default: new Date(),
+      type: String,
+      default: new Date().toString(),
     },
   })
 const Presciption = mongoose.model("presciption" , presciptionSchema );

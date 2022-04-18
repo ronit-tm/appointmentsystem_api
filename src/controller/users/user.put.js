@@ -8,6 +8,7 @@ exports.putUser = async (req, res) => {
   try {
     let { id } = req.params;
     let { name, phone, categroy, address } = req.body;
+    let user = await mongoDbServiceUser.getSingleDocumentById(id)
     if (!user) {
       return sendResponse( res, messages.notFound(responescode.notFound));
     }

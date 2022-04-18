@@ -9,7 +9,7 @@ const mongoDbServiceUser = require('../../service/mongoDbService')({ model : Use
 exports.resetpassword =async (req,res) => {
     try{
        let {oldPassword, newPassword,email} = req.body;
-     
+
        let user = await mongoDbServiceUser.getSingleDocumentByQuery({email});
        if (!user) {                                                     
         return sendResponse(res, messages.notFound(responescode.notFound));
