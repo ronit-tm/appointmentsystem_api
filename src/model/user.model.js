@@ -15,9 +15,9 @@ const userSchema = new mongoose.Schema({
   },
   name: {
     type: String,
-    required: true,
-    minlength: 4,
-    maxlength: 10,
+   
+    minlength: 4 ,
+    maxlength: 20,
   },
   address: {
     type: String,
@@ -26,7 +26,6 @@ const userSchema = new mongoose.Schema({
     type: String,
     minlength: 6,
     maxlength: 256,
-   
   },
   email: {
     type: String,
@@ -39,7 +38,7 @@ const userSchema = new mongoose.Schema({
   phone: {
     type: String,
     required: true,
-    minlength: 5,
+    minlength: 10,
     maxlength: 10,
   },
 });

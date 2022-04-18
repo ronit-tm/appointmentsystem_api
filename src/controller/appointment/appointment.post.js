@@ -12,54 +12,50 @@ const mongoDbServiceCategroy = require("../../service/mongoDbService")({ model: 
 
 exports.appointmentPost = async(req,res) => {
   try {
-    let { role, name,appointmentdate, email, phone,password  , doctor , message } = req.body;
-    console.log('req.body: ', req.body);
+    let { patient,appointmentdate, email, phone, doctor, message } = req.body;
     let user = await mongoDbServiceuser.getSingleDocumentByQuery({email})  
-    
-  console.log("user",user);
+   
   if (user) { 
-  
+
   let appointmentData = {
      doctor,
      patient: user._id,
-     appointmentdate ,
+     appointmentdate: appointmentdate? appointmentdate: new Date().toString(),
      message
-    }
+  }
   let createAppointment = await mongoDbServiceAppointment.createDocument(appointmentData);
+ 
    let createdAppointment = await mongoDbServiceAppointment.getSingleDocumentByIdPopulate(
     createAppointment._id ,
      ["_id","doctor","patient", "appointmentdate","applyDate","message"],
     [ {path : "doctor" , select : "_id name email phone address"} , 
     {path: "patient" , select : "_id name email phone"}]
     )
+  
       return sendResponse(res, messages.successResponse(responescode.success, createdAppointment));
     } else {
-      if(password){
-        const salt = await bcrypt.genSalt(10);
-        password = await bcrypt.hash(password, salt);
-      }
-    let userData = {
-      role: role,
-      password, 
-      name,
+     
+  let userData = {
+      role: "patient", 
+      name: patient,
       email,
       phone,
     }
     let createdUser = await mongoDbServiceuser.createDocument(userData)
-    console.log(createdUser);
     let appointmentData = {
       doctor,
       patient: createdUser._id,
-      appointmentdate,
+      appointmentdate : appointmentdate? appointmentdate: new Date().toString(),
       message
     }
     let createdAppointment = await mongoDbServiceAppointment.createDocument(appointmentData);
+  
     createdAppointment = await mongoDbServiceAppointment.getSingleDocumentByIdPopulate(
       createdAppointment._id ,
        ["_id","doctor","patient","appointmentdate","applyDate","message"],
       [ {path : "doctor" , select : "_id name email phone address "} , 
-    {path: "patient" , select : "_id name email phone message"}]
-    )
+    {path: "patient" , select : "_id name email phone message"}])
+
     return sendResponse( res, messages.successResponse(responescode.success,createdAppointment));
     }
   } catch (error) {

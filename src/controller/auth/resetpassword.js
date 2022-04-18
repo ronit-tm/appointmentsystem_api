@@ -9,8 +9,8 @@ const mongoDbServiceUser = require('../../service/mongoDbService')({ model : Use
 exports.resetpassword =async (req,res) => {
     try{
        let {oldPassword, newPassword,email} = req.body;
-     
-       let user = await mongoDbServiceUser.findExistsData({email});
+
+       let user = await mongoDbServiceUser.getSingleDocumentByQuery({email});
        if (!user) {                                                     
         return sendResponse(res, messages.notFound(responescode.notFound));
        }
@@ -18,9 +18,6 @@ exports.resetpassword =async (req,res) => {
         if(!password) return sendResponse(res, messages.badRequest(responescode.badRequest));
         const salt = await bcrypt.genSalt(10);
         user.password = await bcrypt.hash(newPassword,salt)
-        // let id = user._id.toString()
-        // 
-    //    let updateUser =await User.findByIdAndUpdate(id, {password: abc},{new:true})   
         user.save()
         .then((data) => {
             return sendResponse(res, messages.successResponse(responescode.success,data));

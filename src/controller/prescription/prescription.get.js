@@ -15,12 +15,13 @@ exports.getAllpresciption = async (req, res) => {
     } else if (doctor) {
       return (query = { doctor });
     }
-    let getpresciption = await mongoDbServicePrescription.getDocumentByQuery(query);;
-    if (!getpresciption) {
+    let getPresciption = await mongoDbServicePrescription.getDocumentByQuery(query);;
+    if (!getPresciption) {
       return sendResponse(res, messages.notFound(responescode.notFound));
     }
     const select = ["doctor", "patient", "note", "date", "media"];
-    await mongoDbServicePrescription.getDocumentByQuery(query, select)
+    const populate = [{ path: "doctor", select: "_id name"}, { path: "patient", select: "_id name" } ];
+    await mongoDbServicePrescription.getDocumentByQueryPopulate(query, select, populate)
       .then((data) => {
         return sendResponse(res, messages.successResponse(responescode.success, data));
       })
@@ -40,8 +41,8 @@ exports.prescriptionGetId = async (req, res) => {
   try {
     let { id } = req.params;
     const select = ["doctor", "patient", "note", "date", "media"];
-    await mongoDbServicePrescription.getSingleDocumentById (id, select)
-      // await  Category.findById(id)
+    const populate = [{ path: "doctor", select: "_id name"}, { path: "patient", select: "_id name" } ];
+    await mongoDbServicePrescription.getSingleDocumentByIdPopulate (id, select, populate)
       .then((data) => {
         return sendResponse( res, messages.successResponse(responescode.success, data));
       })

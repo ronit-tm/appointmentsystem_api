@@ -6,9 +6,9 @@ const mongoDbServicePrescription = require("../../service/mongoDbService")({ mod
 
 exports.presciptiondelete = async (req, res) => {
   try {
-    let { id } = req.param;
-    let presciptiondelete = await mongoDbServicePrescription.deleteDocument(id);
-    if (presciptiondelete) {
+    let { id } = req.params;
+    let deletePresciption = await mongoDbServicePrescription.deleteDocument(id);
+    if (deletePresciption) {
       return sendResponse(res, messages.successResponseMessage(responescode.success, "data successfull delete" ));
     } else {
       return sendResponse(res, messages.badRequest(responescode.badRequest));

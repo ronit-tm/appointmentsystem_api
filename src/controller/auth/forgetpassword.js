@@ -3,6 +3,7 @@ const bcrypt = require("bcrypt");
 const messages = require("../../utils/messegs");
 const responescode = require("../../utils/responescode");
 const { sendResponse } = require("../../helps/sendResponse");
+const mongoDbServiceUser = require("../../service/mongoDbService")({model: User});
 
 exports.forgotpassword = async (req, res) => {
   try {

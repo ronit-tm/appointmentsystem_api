@@ -11,13 +11,14 @@ module.exports = {
  // POST  /auth/forget
  forgetPassword:[
      body("email","Email is required").exists().isEmail(),
-     body('newpassword','passwords must be at least 6 chars long').exists({checkFalsy:true})
+     body('newPassword','passwords must be at least 6 chars long').exists({checkFalsy:true})
  ],
 
  //POST  /auth/resetpassword
  resetpassword:[
      body("email",'Email is required').exists().isEmail(),
-     body('oldpassword', 'oldpassword is requires').exists()
+     body('oldPassword', 'oldpassword is requires').exists(),
+     body('newPassword','passwords must be at least 6 chars long').exists({checkFalsy:true})
  ]
 
 }

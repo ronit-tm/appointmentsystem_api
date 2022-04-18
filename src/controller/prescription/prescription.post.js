@@ -14,12 +14,11 @@ exports.presciptionPost = async (req, res) => {
       note, 
       media,
     };
-   
-    let createprescription = await mongoDbServicePrescription.createDocument( presciption );
-    if (createprescription) {
-      createprescription = createprescription.toJSON();
-   delete createprescription.__v
-      return sendResponse(res, messages.successResponse(responescode.success, createprescription));
+    let createPrescription = await mongoDbServicePrescription.createDocument( presciption );
+    if (createPrescription) {
+      createPrescription = createPrescription.toJSON();
+   delete createPrescription.__v
+      return sendResponse(res, messages.successResponse(responescode.success, createPrescription));
     } else {
       return sendResponse(res, messages.badRequest(responescode.badRequest));
     }

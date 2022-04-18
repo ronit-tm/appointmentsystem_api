@@ -11,12 +11,12 @@ const appointmentSchema = new mongoose.Schema({
       ref: "User",
     },
     appointmentdate: {
-      type: Date,
-      default: new Date(),
+      type: String,
+      default: new Date().toString(),
     },
     applyDate :{
-      type : Date,
-      default: new Date()
+      type : String,
+      default: new Date().toString(),
     },
     message: {
       type : String,
