@@ -21,6 +21,12 @@ const appointmentSchema = new mongoose.Schema({
     message: {
       type : String,
       require:true
+    },
+    phone: {
+    type: String,
+    required: true,
+    minlength: 10,
+    maxlength: 10,
     }
   })
 const Appointment = mongoose.model("appointment", appointmentSchema)

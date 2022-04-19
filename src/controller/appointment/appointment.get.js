@@ -18,7 +18,7 @@ exports.getAllappointment = async (req,res) => {
           return query = {patient};
           }
            const select = ["doctor", "patient", "date", "address" ,"phone","message" ,"appointmentdate"]
-           const populate =  [{ path: "doctor", select: "_id name"}, { path: "patient", select: "_id name email phone" } ];
+           const populate =  [{ path: "doctor", select: "_id name"}, { path: "patient", select: "_id name email " } ];
            await mongoDbServiceAppointment.getDocumentByQueryPopulate(query, select, populate )
            .then((data) => {
              return sendResponse(res, messages.successResponse(responescode.success, data))
@@ -39,7 +39,7 @@ exports.getAllappointment = async (req,res) => {
     try {
       let { id } = req.params;
       const select = ["doctor", "patient", "date", "address" , "message", "appointmentdate"];
-      const populate =  [{ path: "doctor", select: "_id name"}, { path: "patient", select: "_id name  email phone " } ];
+      const populate =  [{ path: "doctor", select: "_id name"}, { path: "patient", select: "_id name  email  " } ];
       await mongoDbServiceAppointment.getSingleDocumentByIdPopulate(id, select, populate)
         .then((data) => {
           return sendResponse( res, messages.successResponse(responescode.success, data));

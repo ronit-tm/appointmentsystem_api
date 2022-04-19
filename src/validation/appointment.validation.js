@@ -31,19 +31,11 @@ module.exports = {
     body("phone").optional(),
     body("message" ).optional()
   ],
-  
-  // Post / 
+
   
   //  PUT /appointment
   appointmentput: [
     body("doctor").custom((value) => {
-      return mongoDbServiceUser.getDocumentById(value).then((appointment) => {
-        if (!appointment) {
-          return Promise.reject("can not found ID");
-        }
-      });
-    }),
-    body("patient").custom((value) => {
       return mongoDbServiceUser.getDocumentById(value).then((appointment) => {
         if (!appointment) {
           return Promise.reject("can not found ID");

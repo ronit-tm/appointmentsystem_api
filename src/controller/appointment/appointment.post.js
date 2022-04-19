@@ -13,15 +13,17 @@ const mongoDbServiceCategroy = require("../../service/mongoDbService")({ model: 
 exports.appointmentPost = async(req,res) => {
   try {
     let { patient,appointmentdate, email, phone, doctor, message } = req.body;
+    console.log('req.body: ', req.body);
     let user = await mongoDbServiceuser.getSingleDocumentByQuery({email})  
+    console.log('user: ', user);
    
   if (user) { 
-
   let appointmentData = {
      doctor,
      patient: user._id,
      appointmentdate: appointmentdate? appointmentdate: new Date().toString(),
-     message
+     message,
+     phone
   }
   let createAppointment = await mongoDbServiceAppointment.createDocument(appointmentData);
  
@@ -46,7 +48,8 @@ exports.appointmentPost = async(req,res) => {
       doctor,
       patient: createdUser._id,
       appointmentdate : appointmentdate? appointmentdate: new Date().toString(),
-      message
+      message,
+      phone
     }
     let createdAppointment = await mongoDbServiceAppointment.createDocument(appointmentData);
   
