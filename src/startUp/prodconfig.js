@@ -18,6 +18,7 @@ module.exports = function (app) {
   app.use(methodOverride());
   // enable CORS
   app.use(cors({ origin: true }));
+  
   app.use(express.static(path.join(__dirname, 'uploads')));
   app.use('/uploads', express.static('uploads'));
 };
