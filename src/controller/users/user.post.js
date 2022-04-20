@@ -46,6 +46,7 @@ exports.postUser = async (req, res) => {
     user.password = await bcrypt.hash(password.toString(), salt);
     }
     let createdUser = await mongoDbServiceUser.createDocument(user);
+    console.log('createdUser: ', createdUser);
     if (createdUser) {
       const token = createdUser.generateAuthToken();
       createdUser = createdUser.toJSON();
