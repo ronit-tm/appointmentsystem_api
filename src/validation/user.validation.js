@@ -11,7 +11,7 @@ module.exports = {
     body("name", "name is required").exists().isString(),
     body("email", "email must be required").exists().isEmail(),
     body("password", "password must be required").optional(),
-    body("phone").isMobilePhone(),
+    body("phone").optional(),
     body("category").optional().isString(),
     body("address", "address is required").optional().trim().isString(),
   ],

@@ -6,11 +6,12 @@ const mongoDbServicePrescription = require("../../service/mongoDbService")({mode
 
 exports.presciptionPost = async (req, res) => {
   try {
-    let { doctor, patient, note, media } = req.body;
+    let { doctor, patient, note, media,date } = req.body;
+    console.log('req.body: ', req.body);
     let presciption = {
       doctor,
       patient,
-      date : new Date(),
+      date : date,
       note, 
       media,
     };

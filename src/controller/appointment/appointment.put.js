@@ -7,7 +7,8 @@ const mongoDbServiceAppointment = require('../../service/mongoDbService')({model
 exports.appointmentPut = async(req,res) => {
     try{
         let {id} = req.params
-        let {doctor,patient,address, phone} = req.body
+        let {doctor, phone, message} = req.body
+        console.log('req.body: ', req.body);
 
       let appointment = await mongoDbServiceAppointment.getSingleDocumentById(id);
       if(!appointment){
@@ -15,13 +16,14 @@ exports.appointmentPut = async(req,res) => {
       }
       appointment = appointment.toJSON()
       appointment.doctor = doctor ? doctor : appointment.doctor
-      appointment.patient = patient ? patient : appointment.patient
-      appointment.address = address ? address : appointment.address
       appointment.phone = phone ? phone : appointment.phone
+      appointment.message = message ? message : appointment.message
 
       let updateAppointment = await mongoDbServiceAppointment.findOneAndUpdateDocument({_id : id}, appointment , 
         {new : true});
+       
          if(updateAppointment){
+          console.log("cdkcnd : ",updateAppointment);
            updateAppointment = updateAppointment.toJSON()
            delete updateAppointment.__v
            return sendResponse(res, messages.successResponse(responescode.success, updateAppointment)) 
