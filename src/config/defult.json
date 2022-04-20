@@ -1,4 +1,4 @@
 {
     "jwtPrivatKey" :  "abc_123",
-    "DB_URL": "mongodb+srv://admin:Admin%40123@glooser.vjdmt.mongodb.net/appointmentsystem"
+    "DB_URL": "mongodb+srv://admin:Admin123@appointment.teruh.mongodb.net/appointment"
 }
